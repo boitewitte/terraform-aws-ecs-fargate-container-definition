@@ -28,13 +28,11 @@ variable "entry_point" {
   default = null
 }
 
-
 variable "essential" {
   type = bool
   description = "If the essential parameter of a container is marked as true, and that container fails or stops for any reason, all other containers that are part of the task are stopped."
   default = null
 }
-
 
 variable "name" {
   type = string
