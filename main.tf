@@ -74,18 +74,15 @@ locals {
     )
   )
 
-  log_options = var.log_options != null && length(keys(var.log_options)) > 0 ? { options = var.log_options } : {}
-  log_secret_options = var.log_secret_options != null ? { secretOptions = var.log_secret_options } : {}
+  log_driver = local.log_configuration_is_valid == true && var.log_driver != null ? { logDriver = var.log_driver } : {}
+  log_options = local.log_configuration_is_valid == true && var.log_options != null && length(keys(var.log_options)) > 0 ? { options = var.log_options } : {}
+  log_secret_options = local.log_configuration_is_valid == true && var.log_secret_options != null ? { secretOptions = var.log_secret_options } : {}
 
-  log_configuration = (
-    local.log_configuration_is_valid == true
-      ? merge(
-        { logDriver = var.log_driver },
-        local.log_options
-      )
-      : {}
+  log_configuration = merge(
+    local.log_driver,
+    local.log_options,
+    local.log_secret_options
   )
-
 
   storage_logging = merge(
     var.readonly_root_filesystem != null ? { readonlyRootFilesystem = var.readonly_root_filesystem } : {},
