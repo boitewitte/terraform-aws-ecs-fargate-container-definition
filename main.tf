@@ -81,8 +81,7 @@ locals {
     local.log_configuration_is_valid == true
       ? merge(
         { logDriver = var.log_driver },
-        local.log_options,
-        local.log_secret_options
+        local.log_options
       )
       : {}
   )
