@@ -53,7 +53,7 @@ variable "log_driver" {
 variable "log_options" {
   type = map
   description = "The configuration options to send to the log driver."
-  default = null
+  default = {}
 }
 
 variable "log_secret_options" {
