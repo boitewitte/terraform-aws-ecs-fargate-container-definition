@@ -26,7 +26,13 @@ locals {
 
   port_mappings = (
     var.port_mappings != null
-      ? { portMappings: { containerPort = var.port_mappings["container_port"] } }
+      ? {
+          portMappings: [
+            for mapping in var.port_mappings: {
+              containerPort = mapping["container_port"]
+            }
+          ]
+        }
       : { }
   )
 

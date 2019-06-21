@@ -75,7 +75,7 @@ variable "memory_reservation" {
 }
 
 variable "port_mappings" {
-  type = object({ container_port = number })
+  type = list(object({ container_port = number }))
   description = "Port mappings allow containers to access ports on the host container instance to send or receive traffic. As this is Fargate, only container_port is allowed"
   default = null
 }
